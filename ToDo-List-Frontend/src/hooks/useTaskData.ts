@@ -65,7 +65,7 @@ export function useTaskData(): TaskDataHook {
 
     function markTaskAsDone(id: number) {
         api.post(endpointsUrls.Task.markAsDone(id), {})
-            .then((data: ITask) => {
+            .then(() => {
                 findAllTasks()
             });
     }

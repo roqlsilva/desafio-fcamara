@@ -1,4 +1,4 @@
-FROM node:21.5
+FROM node:18-alpine
 
 WORKDIR /usr/src/app
 
@@ -8,4 +8,8 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 5173
+RUN npm run build
+
+EXPOSE 9999
+
+CMD [ "npm", "run", "preview" ]

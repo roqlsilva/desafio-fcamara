@@ -31,23 +31,22 @@ services:
     volumes:
       - ./data/api/m2:/root/.m2
 
-  # frontend:
-  #   container_name: toto.frontend
-  #   build: 
-  #     context: ./ToDo-List-Frontend
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #     - './ToDo-List-Frontend:/usr/src/app'
-  #     - '/usr/src/app/node_modules'
-  #   ports:
-  #     - '5173:5173'
-  #   environment:
-  #     - VITE_API_URL=http://localhost:8080
-  #   networks:
-  #     - todo-net
-  #   depends_on:
-  #     - server
-  #   entrypoint: 'npm run dev'
+  frontend:
+    container_name: toto.frontend
+    build: 
+      context: ./ToDo-List-Frontend
+      dockerfile: Dockerfile
+    volumes:
+      - './ToDo-List-Frontend:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - 9999:9999
+    environment:
+      - VITE_API_URL=http://server:8080
+    networks:
+      - todo-net
+    depends_on:
+      - server
 
 networks:
   todo-net:
