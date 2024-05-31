@@ -2,6 +2,7 @@ package br.com.roqlsilva.todolist.api.controllers;
 
 import br.com.roqlsilva.todolist.api.dto.CreateTaskDTO;
 import br.com.roqlsilva.todolist.api.dto.GetAllTasksResponseDTO;
+import br.com.roqlsilva.todolist.api.exceptions.BusinessException;
 import br.com.roqlsilva.todolist.api.models.Task;
 import br.com.roqlsilva.todolist.api.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +34,14 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<Task> createNewTask(@RequestBody CreateTaskDTO createTaskDTO) {
-        Task task = new Task();
-        task.setCreatedAt(new Date());
-        task.setDescription(createTaskDTO.getDescription());
-        return ResponseEntity.ok(service.createNewTask(task));
+        try {
+            Task task = new Task();
+            task.setCreatedAt(new Date());
+            task.setDescription(createTaskDTO.getDescription());
+            return ResponseEntity.ok(service.createNewTask(task));
+        } catch (BusinessException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     @GetMapping("/{id}")
