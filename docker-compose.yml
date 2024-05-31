@@ -14,23 +14,40 @@ services:
     networks:
       - todo-net
 
-  frontend:
-    container_name: toto.frontend
+  server:
+    container_name: todo.backend
     build: 
-      context: ./ToDo-List-Frontend
+      context: ./ToDo-List-API
       dockerfile: Dockerfile
-    volumes:
-      - './ToDo-List-Frontend:/usr/src/app'
-      - '/usr/src/app/node_modules'
+    restart: always
     ports:
-      - '5173:5173'
-    environment:
-      - VITE_API_URL=http://localhost:8080
+      - 8080:8080
     networks:
       - todo-net
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysql:3306/todolist?allowPublicKeyRetrieval=true
     depends_on:
       - mysql
-    entrypoint: 'npm run dev'
+    volumes:
+      - ./data/api/m2:/root/.m2
+
+  # frontend:
+  #   container_name: toto.frontend
+  #   build: 
+  #     context: ./ToDo-List-Frontend
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - './ToDo-List-Frontend:/usr/src/app'
+  #     - '/usr/src/app/node_modules'
+  #   ports:
+  #     - '5173:5173'
+  #   environment:
+  #     - VITE_API_URL=http://localhost:8080
+  #   networks:
+  #     - todo-net
+  #   depends_on:
+  #     - server
+  #   entrypoint: 'npm run dev'
 
 networks:
   todo-net:
