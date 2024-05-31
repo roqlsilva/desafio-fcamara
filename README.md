@@ -47,5 +47,5 @@ A URL para acessar a aplicação pelo navegador é `http://localhost:9999`.
 
 Qualquer dúvida estou a disposição para tirar quais quer dúvidas
 
-Nome: Rodrigo Otacilio
+Nome: Rodrigo Otacilio\
 e-mail: roqls23@gmail.com
