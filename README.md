@@ -10,6 +10,8 @@ No Backend, foram implementados testes unitários com jUnit 5 para garantir a in
 de registrar uma nova tarefa, falha ao registrar uma nova tarefa, listar todas as tarefas pendentes e listar 
 todas as tarefas completadas.
 
+No frontend, foi utilizado o framework ReactJS com TypeScript e o ViteJS.
+
 ## Pré-requisitos
 
 - Docker
