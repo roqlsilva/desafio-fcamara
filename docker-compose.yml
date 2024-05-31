@@ -11,3 +11,27 @@ services:
       - MYSQL_DATABASE=todolist
     volumes:
       - ./data/mysql/data:/var/lib/mysql
+    networks:
+      - todo-net
+
+  frontend:
+    container_name: toto.frontend
+    build: 
+      context: ./ToDo-List-Frontend
+      dockerfile: Dockerfile
+    volumes:
+      - './ToDo-List-Frontend:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '5173:5173'
+    environment:
+      - VITE_API_URL=http://localhost:8080
+    networks:
+      - todo-net
+    depends_on:
+      - mysql
+    entrypoint: 'npm run dev'
+
+networks:
+  todo-net:
+    driver: bridge
